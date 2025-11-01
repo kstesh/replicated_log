@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv/
+env/
+venv/
+*.swp
+
+.idea/
+
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.dockerignore
+docker-compose.override.yml

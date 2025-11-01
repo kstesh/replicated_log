@@ -1,0 +1,30 @@
+services:
+  master:
+    build: .
+    container_name: master
+    command: ["uvicorn", "master.master:app", "--host", "0.0.0.0", "--port", "8000"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - secondary1
+      - secondary2
+
+  secondary1:
+    build: .
+    container_name: secondary1
+    command: ["uvicorn", "secondary.secondary:app", "--host", "0.0.0.0", "--port", "8001"]
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+
+  secondary2:
+    build: .
+    container_name: secondary2
+    command: ["uvicorn", "secondary.secondary:app", "--host", "0.0.0.0", "--port", "8002"]
+    volumes:
+      - .:/app
+    ports:
+      - "8002:8002"

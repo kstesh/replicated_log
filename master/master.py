@@ -11,6 +11,7 @@ app = FastAPI()
 messages = []
 message_counter = 0
 
+lock = asyncio.Lock()
 
 with open("config.json") as f:
     CONFIG = json.load(f)
@@ -24,11 +25,11 @@ async def get_messages():
 async def append_message(request: Request):
     global message_counter
 
-    message_counter += 1
-    msg = message_counter
-
-    messages.append(msg)
-    logger.info(f"Appended message ID locally: {msg}")
+    async with lock:
+        message_counter += 1
+        msg = message_counter
+        messages.append(msg)
+        logger.info(f"Appended message ID locally: {msg}")
 
     await replicate_to_secondaries(msg)
 

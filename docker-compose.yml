@@ -13,6 +13,8 @@ services:
 
   secondary1:
     build: .
+    environment:
+      - REPLICATION_DELAY=2
     container_name: secondary1
     command: ["uvicorn", "secondary.secondary:app", "--host", "0.0.0.0", "--port", "8001"]
     volumes:
@@ -22,6 +24,8 @@ services:
 
   secondary2:
     build: .
+    environment:
+      - REPLICATION_DELAY=15
     container_name: secondary2
     command: ["uvicorn", "secondary.secondary:app", "--host", "0.0.0.0", "--port", "8002"]
     volumes:

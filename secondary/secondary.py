@@ -26,7 +26,7 @@ async def replicate_message(request: Request):
 
     if messages.__contains__(msg_item["id"]):
         logger.info(f"Received duplicated message: {msg_item['id']}")
-        return {"status": "ACK", "message": f"duplicate message # {msg_item['id']}"}
+        return {"status": "ACK"}
 
     messages.setdefault(msg_item["id"], msg_item["message"])
-    return {"status": "ACK", "message": messages[msg_item["id"]]}
+    return {"status": "ACK"}
